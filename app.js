@@ -1,10 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-
 const { BadRequestError, errorHandler } = require("./app/errors");
-
 const setupContactRoutes = require("./app/routes/contact.routes");
-
 const app = express();
 
 app.use(cors());
@@ -29,7 +26,7 @@ app.use((req, res, next) => {
     next(new BadRequestError(404, "Resource not found"))
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, next, error) => {
     // Middleware xử lý lỗi tập chung.
     // Trong các đoạn code xử lý ở các route, gọi next(error)
     // sẽ chuyển về middleware xử lý lỗi này
